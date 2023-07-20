@@ -16,3 +16,5 @@ urlpatterns = [
     path("cooks/<int:pk>", DishDetailView.as_view(), name="cook-detail"),
 
 ]
+
+app_name = "kitchen"
