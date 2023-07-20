@@ -11,9 +11,9 @@ urlpatterns = [
     path("", index, name="index"),
     path("categories/", CategoryListView.as_view(), name="category-list"),
     path("dishes/", DishListView.as_view(), name="dish-list"),
-    path("dishes/<int:pk>", DishDetailView.as_view(), name="dish-detail"),
+    path("dishes/<int:pk>/", DishDetailView.as_view(), name="dish-detail"),
     path("cooks/", CookListView.as_view(), name="cook-list"),
-    path("cooks/<int:pk>", DishDetailView.as_view(), name="cook-detail"),
+    path("cooks/<int:pk>/", DishDetailView.as_view(), name="cook-detail"),
 
 ]
 
