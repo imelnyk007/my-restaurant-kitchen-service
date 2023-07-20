@@ -24,6 +24,7 @@ class CategoryListView(generic.ListView):
 
 class DishListView(generic.ListView):
     model = Dish
+    queryset = Dish.objects.select_related("category")
 
 
 class DishDetailView(generic.DetailView):
@@ -32,6 +33,7 @@ class DishDetailView(generic.DetailView):
 
 class CookListView(generic.ListView):
     model = Cook
+    queryset = Cook.objects.all().prefetch_related("dishes__category")
 
 
 class CookDetailView(generic.DetailView):
