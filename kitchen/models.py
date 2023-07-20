@@ -5,9 +5,12 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField(max_length=63)
 
+    class Meta:
+        verbose_name_plural = "categories"
+
 
 class Cook(AbstractUser):
-    year_of_experience = models.IntegerField()
+    year_of_experience = models.IntegerField(null=True)
     photo = models.ImageField(null=True, blank=True, upload_to="cook_photo/")
 
     class Meta:
@@ -22,3 +25,6 @@ class Dish(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     cooks = models.ManyToManyField(Cook, related_name="dishes")
     picture = models.ImageField(null=True, blank=True, upload_to="dish_pictures/")
+
+    class Meta:
+        verbose_name_plural = "dishes"
