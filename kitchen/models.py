@@ -7,6 +7,10 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = "categories"
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
 
 
 class Cook(AbstractUser):
