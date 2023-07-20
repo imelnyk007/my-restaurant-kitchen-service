@@ -10,6 +10,10 @@ class Cook(AbstractUser):
     year_of_experience = models.IntegerField()
     photo = models.ImageField(null=True, black=True, upload_to="cook_photo/")
 
+    class Meta:
+        verbose_name = "cook"
+        verbose_name_plural = "cooks"
+
 
 class Dish(models.Model):
     name = models.CharField(max_length=63)
