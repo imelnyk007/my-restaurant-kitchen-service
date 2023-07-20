@@ -25,6 +25,7 @@ class CategoryListView(generic.ListView):
 class DishListView(generic.ListView):
     model = Dish
     queryset = Dish.objects.select_related("category")
+    paginate_by = 3
 
 
 class DishDetailView(generic.DetailView):
@@ -34,6 +35,7 @@ class DishDetailView(generic.DetailView):
 class CookListView(generic.ListView):
     model = Cook
     queryset = Cook.objects.all().prefetch_related("dishes__category")
+    paginate_by = 4
 
 
 class CookDetailView(generic.DetailView):
