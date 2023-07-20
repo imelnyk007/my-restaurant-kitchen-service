@@ -46,11 +46,11 @@
         <h3 class="text-gradient text-primary mb-0 mt-2">{{ cook.first_name }} {{ cook.last_name }}</h3>
         <h6>Username: {{ cook.username }}</h6>
         <p>Year of experience: {{ cook.year_of_experience }}</p>
-        <a href="javascript:;" class="text-primary icon-move-right">Update {{ cook.username }} page
+        <a href="{% url "kitchen:cook-update" pk=cook.id %}" class="text-primary icon-move-right">Update {{ cook.username }} page
           <i class="fas fa-arrow-right text-sm ms-1"></i>
         </a>
         <br>
-        <a href="javascript:;" class="text-primary icon-move-right">Delete {{ cook.username }}'s page
+        <a href="{% url "kitchen:cook-delete" pk=cook.id %}" class="text-primary icon-move-right">Delete {{ cook.username }}'s page
           <i class="fas fa-arrow-right text-sm ms-1"></i>
         </a>
       </div>
