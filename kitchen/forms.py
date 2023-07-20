@@ -31,3 +31,30 @@ class CookUpdateForm(forms.ModelForm):
     class Meta:
         model = Cook
         fields = ["first_name", "last_name", "year_of_experience", "photo"]
+
+
+class CategoryNameSearchForm(forms.Form):
+    name = forms.CharField(
+        max_length=63,
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Search by name"})
+    )
+
+
+class DishNameSearchForm(forms.Form):
+    name = forms.CharField(
+        max_length=63,
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Search by name"})
+    )
+
+
+class CookUsernameSearchForm(forms.Form):
+    username = forms.CharField(
+        max_length=63,
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Search by username"})
+    )

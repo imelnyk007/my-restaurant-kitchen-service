@@ -21,6 +21,10 @@
             <h1 class="text-white">Work with an amazing design</h1>
             <p class="lead mb-4 text-white opacity-8">We’re constantly trying to express ourselves and actualize our dreams. If you have the opportunity to play this game</p>
             <a href="{% url "kitchen:cook-create" %}"><button type="submit" class="btn bg-white text-dark">Register new cook</button></a>
+            <form action="" method="get" class="form-inline">
+              {{ search_form }}
+              <input type="submit" value="Search" class="btn btn-secondary">
+            </form>
           </div>
         </div>
       </div>
