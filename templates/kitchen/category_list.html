@@ -58,6 +58,9 @@
             </div>
             <div class="description ps-3">
               <h4 class="mb-0">{{ category.name }}</h4>
+              <button type="button" class="btn bg-gradient w-auto me-0" style="font-size: 8px"><a href="{% url "kitchen:category-update" pk=category.id%}">Update</a></button>
+              <button type="button" class="btn bg-gradient-danger w-auto me-0" style="font-size: 8px"><a href="{% url "kitchen:category-delete" %}">Delete</a></button>
+              <p></p>
             </div>
           </div>
         {% endfor %}
@@ -65,4 +68,7 @@
     </div>
   </div>
 </section>
+
+
 {% endblock content %}
+
