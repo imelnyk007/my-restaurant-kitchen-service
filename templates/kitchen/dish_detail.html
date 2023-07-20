@@ -47,11 +47,11 @@
         <br>
         <h6>Price: {{ dish.price }} Category: {{ dish.category.name }}</h6>
         <p>{{ dish.description }}</p>
-        <a href="javascript:;" class="text-primary icon-move-right">Update {{ dish.name }}
+        <a href="{% url "kitchen:dish-update" pk=dish.id %}" class="text-primary icon-move-right">Update {{ dish.name }}
           <i class="fas fa-arrow-right text-sm ms-1"></i>
         </a>
         <br>
-        <a href="javascript:;" class="text-primary icon-move-right">Delete {{ dish.name }}
+        <a href="{% url "kitchen:dish-delete" pk=dish.id %}" class="text-primary icon-move-right">Delete {{ dish.name }}
           <i class="fas fa-arrow-right text-sm ms-1"></i>
         </a>
       </div>
