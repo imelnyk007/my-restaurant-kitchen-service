@@ -17,7 +17,7 @@
     <div class="row">
       <div class="col-lg-7 d-flex justify-content-center flex-column">
         <div class="card card-body d-flex justify-content-center shadow-lg p-5 blur align-items-center">
-          <h3 class="text-center">{{ object|yesno:"Update,Create" }} dish</h3>
+          <h3 class="text-center">{{ object|yesno:"Update,Create" }} cook</h3>
             <form role="form" id="contact-form" method="post" autocomplete="off">
               <div class="card-body">
                 <div class="row">
@@ -25,7 +25,7 @@
                     <form action="" >
                     {% csrf_token %}
                     {% for field in form %}
-                      <label>Enter dish {{ field.name }}</label>
+                      <label>Enter cook {{ field.name }}</label>
                       <div class="input-group">
                         {{ field }}
                       </div>
