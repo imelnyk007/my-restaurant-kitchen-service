@@ -8,7 +8,7 @@ class Category(models.Model):
 
 class Cook(AbstractUser):
     year_of_experience = models.IntegerField()
-    photo = models.ImageField(null=True, black=True, upload_to="cook_photo/")
+    photo = models.ImageField(null=True, blank=True, upload_to="cook_photo/")
 
     class Meta:
         verbose_name = "cook"
@@ -18,7 +18,7 @@ class Cook(AbstractUser):
 class Dish(models.Model):
     name = models.CharField(max_length=63)
     description = models.TextField(null=True, blank=True)
-    price = models.DecimalField(decimal_places=2)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     cooks = models.ManyToManyField(Cook, related_name="dishes")
-    picture = models.ImageField(null=True, black=True, upload_to="dish_pictures/")
+    picture = models.ImageField(null=True, blank=True, upload_to="dish_pictures/")
