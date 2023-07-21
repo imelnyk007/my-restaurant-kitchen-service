@@ -31,11 +31,12 @@ class Dish(models.Model):
     description = models.TextField(null=True, blank=True)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    cooks = models.ManyToManyField(Cook, related_name="dishes")
+    cooks = models.ManyToManyField(Cook, related_name="dishes", null=True)
     picture = models.ImageField(null=True, blank=True, upload_to="dish_pictures/")
 
     class Meta:
         verbose_name_plural = "dishes"
+        ordering = ["category__name"]
 
     def __str__(self):
         return self.name
