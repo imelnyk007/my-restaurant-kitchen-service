@@ -187,13 +187,18 @@ def toggle_assign_to_dish(request, pk):
 
 
 def register_request(request):
-    if request.method == "POST":
+    if request.method == 'GET':
+        form = CookCreationForm()
+        return render(request, 'registration/register.html', {'form': form})
+
+    if request.method == 'POST':
         form = CookCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            messages.success(request, 'You have singed up successfully.')
             login(request, user)
-            messages.success(request, "Registration successful.")
-            return redirect("kitchen:index")
-        messages.error(request, "Unsuccessful registration. Invalid information.")
-    form = CookCreationForm()
-    return render(request=request, template_name="registration/register.html", context={"register_form": form})
+            return redirect('kitchen:index')
+        else:
+            return render(request, 'registration/register.html', {'form': form})

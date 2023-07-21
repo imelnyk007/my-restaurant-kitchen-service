@@ -6,14 +6,24 @@
 <!--Register-->
 <div class="container py-5" >
 	<h1 style="padding-top: 300px">Register</h1>
-	<form method="POST">
-		{% csrf_token %}
-    {% if register_form.errors %}
-      <p>{{ register_form.error_messages }}</p>
-    {% endif %}
-		{{ register_form }}
-		<button class="btn btn-primary" type="submit">Register</button>
-	</form>
+  {% csrf_token %}
+	<form method="POST" novalidate>
+    {% csrf_token %}
+    <h2>Sign Up</h2>
+
+    {% for field in form %}
+    <p>
+      {% if field.errors %}
+      <ul class="error">
+        {% for error in field.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {{ field.label_tag }} {{ field }}
+    {% endfor %}
+    <input type="submit" value="Register" />
+  </form>
 	<p class="text-center">If you already have an account, <a href={% url "login" %}>login</a> instead.</p>
 </div>
 
