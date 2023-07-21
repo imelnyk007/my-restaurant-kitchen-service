@@ -12,9 +12,11 @@
 <br><br>
 
 {% block content %}
-  <h1 style="text-align: center; padding-top: 100px">Dishes <a href="{% url "kitchen:dish-create" %}" class="btn bg-gradient-light ">Light</a></h1>
-
-
+  <h1 style="text-align: center; padding-top: 100px">Dishes <a href="{% url "kitchen:dish-create" %}" class="btn bg-gradient-light" style="text-align: right">Light</a></h1>
+  <form action="" method="GET" class="form">
+    {{ search_form }}
+    <input type="submit" value="Search" class="btn bg-gradient-faded-secondary" style="font-size: 8px">
+  </form>
 
 
   {% for dish in dish_list %}

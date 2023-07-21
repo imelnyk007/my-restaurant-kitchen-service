@@ -36,7 +36,7 @@ def index(request):
 
 class CategoryListView(LoginRequiredMixin, generic.ListView):
     model = Category
-    paginate_by = 8
+    paginate_by = 2
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(CategoryListView, self).get_context_data(**kwargs)
@@ -84,10 +84,10 @@ class DishListView(LoginRequiredMixin, generic.ListView):
         context = super(DishListView, self).get_context_data(**kwargs)
 
         name = self.request.GET.get("name", "")
-        context["search_form"] = DishNameSearchForm(
+
+        context["search_form"] = CookUsernameSearchForm(
             initial={"name": name}
         )
-
         return context
 
     def get_queryset(self):
@@ -95,7 +95,9 @@ class DishListView(LoginRequiredMixin, generic.ListView):
         form = DishNameSearchForm(self.request.GET)
 
         if form.is_valid():
-            return queryset.filter(name__icontains=form.cleaned_data["name"])
+            return queryset.filter(
+                name__icontains=form.cleaned_data["name"]
+            )
 
         return queryset
 
