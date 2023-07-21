@@ -16,7 +16,8 @@ from kitchen.views import (
     DishCreateView,
     toggle_assign_to_dish,
     register_request,
-    update_cook, ChangePasswordView,
+    update_cook,
+    ChangePasswordView,
 )
 
 urlpatterns = [

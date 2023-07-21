@@ -17,7 +17,7 @@ class DishForm(forms.ModelForm):
 
 
 class DishUpdateForm(forms.ModelForm):
-    picture = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    picture = forms.ImageField(required=False, widget=forms.FileInput(attrs={'class': 'form-control-file'}))
 
     class Meta:
         model = Dish
@@ -25,6 +25,8 @@ class DishUpdateForm(forms.ModelForm):
 
 
 class CookCreationForm(UserCreationForm):
+    photo = forms.ImageField(required=False, widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+
     class Meta(UserCreationForm.Meta):
         model = Cook
         fields = UserCreationForm.Meta.fields + (
@@ -36,7 +38,7 @@ class CookCreationForm(UserCreationForm):
 
 
 class CookUpdateForm(forms.ModelForm):
-    photo = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    photo = forms.ImageField(required=False, widget=forms.FileInput(attrs={'class': 'form-control-file'}))
 
     class Meta:
         model = Cook

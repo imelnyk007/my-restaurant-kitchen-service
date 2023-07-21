@@ -110,6 +110,21 @@ class DishCreateView(LoginRequiredMixin, generic.CreateView):
     success_url = reverse_lazy("kitchen:dish-list")
 
 
+def update_dish(request, pk):
+    dish = Dish.objects.get(id=pk)
+
+    if request.method == 'POST':
+        form = DishUpdateForm(request.POST, request.FILES, instance=dish)
+
+        if form.is_valid():
+            form.save()
+            return redirect("kitchen:dish-detail", pk=dish.id)
+    else:
+        form = DishUpdateForm(instance=dish)
+
+    return render(request, 'kitchen/dish_form.html', {'form': form})
+
+
 class DishDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Dish
     success_url = reverse_lazy("kitchen:dish-list")
@@ -200,21 +215,6 @@ def update_cook(request, pk):
             return redirect("kitchen:cook-detail", pk=cook.id)
     else:
         form = CookUpdateForm(instance=cook)
-
-    return render(request, 'kitchen/cook_form.html', {'form': form})
-
-
-def update_dish(request, pk):
-    dish = Dish.objects.get(id=pk)
-
-    if request.method == 'POST':
-        form = DishUpdateForm(request.POST, request.FILES, instance=dish)
-
-        if form.is_valid():
-            form.save()
-            return redirect("kitchen:dish-detail", pk=dish.id)
-    else:
-        form = DishUpdateForm(instance=dish)
 
     return render(request, 'kitchen/cook_form.html', {'form': form})
 
