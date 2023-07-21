@@ -192,7 +192,7 @@ def register_request(request):
         return render(request, 'registration/register.html', {'form': form})
 
     if request.method == 'POST':
-        form = CookCreationForm(request.POST)
+        form = CookCreationForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
