@@ -1,7 +1,9 @@
+from django.contrib import messages
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -138,6 +140,15 @@ class CookListView(LoginRequiredMixin, generic.ListView):
 
 class CookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Cook
+    template_name = 'kitchen/cook_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cook = self.get_object()
+        dishes = cook.dishes.all()
+        categories = list(set(dish.category for dish in dishes))
+        context['categories'] = categories
+        return context
 
 
 class CookCreateView(LoginRequiredMixin, generic.CreateView):
@@ -167,3 +178,24 @@ def toggle_assign_to_dish(request, pk):
     else:
         cook.dishes.add(pk)
     return HttpResponseRedirect(reverse_lazy("kitchen:dish-detail", args=[pk]))
+
+
+def register_request(request):
+    if request.method == "POST":
+        form = CookCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, "Registration successful.")
+            return redirect("kitchen:index")
+        messages.error(request, "Unsuccessful registration. Invalid information.")
+    form = CookCreationForm()
+    return render(request=request, template_name="registration/register.html", context={"register_form": form})
+
+
+def cook_detail(request, cook_id):
+    cook = Cook.objects.get(id=cook_id)
+    dishes = cook.dishes.all()
+    categories = list(set(dish.category for dish in dishes))
+
+    return render(request, 'kitchen/cook_detail.html', {'cook': cook, 'categories': categories})
