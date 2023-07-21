@@ -24,7 +24,6 @@
               <div class="mb-3">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <input type="submit" value="Submit">
                 </div>
                 <div class="row">
                   <div class="col-md-12">
@@ -32,9 +31,8 @@
                       <br>
                     </div>
                   </div>
-                {% endfor %}
                 <div class="col-md-12">
-                    <button type="submit" class="btn bg-gradient-dark w-100">Create</button>
+                    <button type="submit" class="btn bg-gradient-dark w-100">Submit</button>
                 </div>
               </div>
             </div>

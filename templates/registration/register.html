@@ -1,29 +1,51 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load static %}
 
+{% block title %} My Restaurant Kitchen Service {% endblock title %}
+
+{% block header %}
+
+{% include 'includes/navigation.html' %}
+
+{% endblock header %}
 
 {% block content %}
+  <section>
+    <div class="page-header min-vh-100">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
+            <div class="card card-plain">
+              <div class="card-header pb-0 text-left">
+                <h4 class="text-primary text-gradient font-weight-bolder">Register</h4>
+                <p class="mb-0">Enter your data to register</p>
+              </div>
+              <div class="card-body">
+                <form method="post" action="" role="form">
+                  {% csrf_token %}
+                  {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                      <span class="text-danger"> {{ error }} </span>
+                    {% endfor %}
+                  {% endif %}
 
-<div class="container py-5" >
-	<h1 style="padding-top: 300px">Register</h1>
-  {% csrf_token %}
-	<form method="POST" novalidate enctype="multipart/form-data">
-    {% csrf_token %}
-    <h2>Sign Up</h2>
-
-    {% for field in form %}
-    <p>
-      {% if field.errors %}
-      <ul class="error">
-        {% for error in field.errors %}
-        <li>{{ error }}</li>
-        {% endfor %}
-      </ul>
-      {% endif %}
-      {{ field.label_tag }} {{ field }}
-    {% endfor %}
-    <input type="submit" value="Register" />
-  </form>
-	<p class="text-center">If you already have an account, <a href={% url "login" %}>login</a> instead.</p>
-</div>
-
-{% endblock %}
+                  {% for field in form %}
+                    <div class="mb-3">
+                     {{ field.name }} {{ field }}
+                    </div>
+                    <span class="text-danger">{{ field.errors }}</span>
+                  {% endfor %}
+                  <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Register</button>
+                </form>
+              <p class="text-center">If you already have an account, <a href={% url "login" %}>login</a> instead.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
+              <img src="{% static 'img/sing_in_page.jpeg' %}" alt="pattern-lines" class="position- opacity-7">
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+{% endblock content %}

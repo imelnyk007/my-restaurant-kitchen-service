@@ -34,6 +34,7 @@ def index(request):
 
 class CategoryListView(LoginRequiredMixin, generic.ListView):
     model = Category
+    paginate_by = 8
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(CategoryListView, self).get_context_data(**kwargs)
