@@ -20,10 +20,16 @@
           <div class="col-lg-8 text-center mx-auto my-auto">
             <h1 class="text-white">Work with an amazing design</h1>
             <p class="lead mb-4 text-white opacity-8">We’re constantly trying to express ourselves and actualize our dreams. If you have the opportunity to play this game</p>
-            <a href="{% url "kitchen:cook-create" %}"><button type="submit" class="btn bg-white text-dark">Register new cook</button></a>
             <form action="" method="get" class="form-inline">
-              {{ search_form }}
-              <input type="submit" value="Search" class="btn btn-secondary">
+              <div class="input-group">
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                {{ search_form }}
+                <button type="submit" class="btn btn-outline-primary">search</button>
+              </div>
             </form>
           </div>
         </div>
@@ -65,15 +71,21 @@
       </div>
       <div class="row">
         {% for cook in cook_list %}
-          <div class="col-lg-6 col-12" style="padding-top: 20px">
+                      <div class="col-lg-6 col-12" style="padding-top: 20px">
             <div class="card card-profile overflow-hidden">
               <div class="row">
                 <div class="col-lg-4 col-md-6 col-12 pe-lg-0">
-                  <a href="javascript:;">
-                    <div class="p-3 pe-md-0">
-                      <img class="w-100 border-radius-md" src="{{ cook.cook_photo.url }}" alt="cook_image">
+                  {% if cook.photo %}
+                    <div class="p-3 pe-md-0" style="height: 200px">
+                      <img class="border-radius-md" src="{{ cook.photo.url }}" alt="cook_image" style="object-fit: cover;height: 180px; width: 200px">
                     </div>
-                  </a>
+                    {% else %}
+                    <div class="p-3 pe-md-0" style="height: 200px">
+                      <p>There are no photo</p>
+                    </div>
+
+                  {% endif %}
+
                 </div>
                 <div class="col-lg-8 col-md-6 col-12 ps-lg-0 my-auto" >
                   <div class="card-body">
@@ -87,6 +99,7 @@
               </div>
             </div>
           </div>
+
         {% endfor %}
       </div>
     </div>

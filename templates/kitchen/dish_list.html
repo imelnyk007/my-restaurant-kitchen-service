@@ -23,12 +23,18 @@
           <div class="row">
             <div class="col-12 mx-auto">
               <div class="row py-lg-3 py-3">
-                <div class="col-lg-3 col-md-5 position-relative my-auto">
-                  <img class="img border-radius-lg max-width-200 w-100 position-relative z-index-2" style="height: 300px" src="{{ dish.dish_pictures.url}}"  alt="dish picture">
+                {% if dish.picture %}
+                  <div class="col-lg-3 col-md-5 position-relative my-auto">
+                  <img class="img border-radius-lg max-width-200 w-100 position-relative z-index-2" style="height: 300px;" src="{{ dish.picture.url }}" alt="dish picture">
                 </div>
+
+                {% endif %}
                 <div class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4">
                   <div class="d-flex justify-content-between align-items-center mb-2">
-                    <h4 class="mb-0">{{ dish.name }}</h4>
+                    <a href="{% url "kitchen:dish-detail" pk=dish.id %}">
+                      <h4 class="mb-0 link-primary">{{ dish.name }}</h4>
+                    </a>
+
 
 
                   </div>
@@ -45,9 +51,7 @@
                   <p class="text-lg mb-0">
                     {{ dish.description }}
                     <br>
-                    <a href="{% url "kitchen:dish-detail" pk=dish.id %}" class="text-info icon-move-right">More about {{ dish.name }}
-                      <i class="fas fa-arrow-right text-sm ms-1"></i>
-                    </a>
+
                   </p>
                 </div>
               </div>

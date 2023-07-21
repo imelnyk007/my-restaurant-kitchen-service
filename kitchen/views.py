@@ -7,8 +7,14 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
-from kitchen.forms import DishForm, CookCreationForm, CookUpdateForm, CategoryNameSearchForm, DishNameSearchForm, \
-    CookUsernameSearchForm
+from kitchen.forms import (
+    DishForm,
+    CookCreationForm,
+    CookUpdateForm,
+    CategoryNameSearchForm,
+    DishNameSearchForm,
+    CookUsernameSearchForm,
+)
 from kitchen.models import Category, Dish, Cook
 
 
@@ -191,11 +197,3 @@ def register_request(request):
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = CookCreationForm()
     return render(request=request, template_name="registration/register.html", context={"register_form": form})
-
-
-def cook_detail(request, cook_id):
-    cook = Cook.objects.get(id=cook_id)
-    dishes = cook.dishes.all()
-    categories = list(set(dish.category for dish in dishes))
-
-    return render(request, 'kitchen/cook_detail.html', {'cook': cook, 'categories': categories})

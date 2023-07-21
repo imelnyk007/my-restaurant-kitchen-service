@@ -93,10 +93,22 @@
                       Account
                     </div>
                     {% if request.user.is_authenticated %}
+                      <a href="{% url "kitchen:cook-detail" pk=user.id%}" class="dropdown-item border-radius-md">
+                      <span class="ps-3">My profile</span>
+                    </a>
+                      <a href="{% url "kitchen:cook-update" pk=user.id%}" class="dropdown-item border-radius-md">
+                      <span class="ps-3">Update profile</span>
+                    </a>
+                      <a href="{% url "kitchen:cook-delete" pk=user.id%}" class="dropdown-item border-radius-md">
+                      <span class="ps-3">Delete profile</span>
+                    </a>
                     <a href="{% url "logout" %}" class="dropdown-item border-radius-md">
                       <span class="ps-3">Log Out</span>
                     </a>
                     {% else %}
+                      <a href="{% url 'kitchen:register' %}" class="dropdown-item border-radius-md">
+                      <span class="ps-3">Register</span>
+                    </a>
                     <a href="{% url 'login' %}" class="dropdown-item border-radius-md">
                       <span class="ps-3">Sing Up</span>
                     </a>

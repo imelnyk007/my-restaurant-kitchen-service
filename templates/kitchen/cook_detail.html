@@ -43,25 +43,31 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-4">
+        {% if cook.photo %}
+          <img class="img border-radius-lg max-width-200 w-100 position-relative z-index-2" src="{{ cook.photo.url }}" alt="cook_photo">
+        {% endif %}
         <h3 class="text-gradient text-primary mb-0 mt-2">{{ cook.first_name }} {{ cook.last_name }}</h3>
-        <h6>Username: {{ cook.username }}</h6>
-        <p>Year of experience: {{ cook.year_of_experience }}</p>
-        <a href="{% url "kitchen:cook-update" pk=cook.id %}" class="text-primary icon-move-right">Update {{ cook.username }} page
-          <i class="fas fa-arrow-right text-sm ms-1"></i>
-        </a>
         <br>
-        <a href="{% url "kitchen:cook-delete" pk=cook.id %}" class="text-primary icon-move-right">Delete {{ cook.username }}'s page
-          <i class="fas fa-arrow-right text-sm ms-1"></i>
-        </a>
+        <h6>Username: <span style="opacity: 4">{{ cook.username }}</span></h6>
+        <h6>Year of experience: {{ cook.year_of_experience }}</h6>
+        <h6>Category cook work with:</h6>
+          <ul>
+            {% for categorie in categories %}
+              <li>{{ categorie }}</li>
+            {% endfor %}
+          </ul>
       </div>
       <div class="col-lg-6 mt-lg-0 mt-5 ps-lg-0 ps-0">
+      <h3>Dishes prepared by {{ cook.first_name }}:</h3>
         {% for dish in cook.dishes.all %}
           <div class="p-3 info-horizontal">
             <div class="icon icon-shape rounded-circle bg-gradient-primary shadow text-center">
               <i class="fas fa-ship opacity-10"></i>
             </div>
             <div class="description ps-3">
-              <h4 class="mb-0">{{ dish.name }}</h4>
+              <a href="{% url "kitchen:dish-detail" pk=dish.id %}">
+                <h4 class="mb-0 link-dark">{{ dish.name }}</h4>
+              </a>
               <p><strong>Category:</strong> {{ dish.category.name }} <strong> Price:</strong> {{ dish.price }}</p>
 
             </div>
