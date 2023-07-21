@@ -84,10 +84,10 @@ class DishListView(LoginRequiredMixin, generic.ListView):
         context = super(DishListView, self).get_context_data(**kwargs)
 
         name = self.request.GET.get("name", "")
-
-        context["search_form"] = CookUsernameSearchForm(
+        context["search_form"] = DishNameSearchForm(
             initial={"name": name}
         )
+
         return context
 
     def get_queryset(self):
@@ -95,9 +95,7 @@ class DishListView(LoginRequiredMixin, generic.ListView):
         form = DishNameSearchForm(self.request.GET)
 
         if form.is_valid():
-            return queryset.filter(
-                name__icontains=form.cleaned_data["name"]
-            )
+            return queryset.filter(name__icontains=form.cleaned_data["name"])
 
         return queryset
 
