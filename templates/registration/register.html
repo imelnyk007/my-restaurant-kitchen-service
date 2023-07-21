@@ -21,14 +21,13 @@
                 <p class="mb-0">Enter your data to register</p>
               </div>
               <div class="card-body">
-                <form method="post" action="" role="form">
+                <form method="POST" enctype="multipart/form-data" novalidate role="form">
                   {% csrf_token %}
                   {% if form.non_field_errors %}
                     {% for error in form.non_field_errors %}
                       <span class="text-danger"> {{ error }} </span>
                     {% endfor %}
                   {% endif %}
-
                   {% for field in form %}
                     <div class="mb-3">
                      {{ field.name }} {{ field }}
