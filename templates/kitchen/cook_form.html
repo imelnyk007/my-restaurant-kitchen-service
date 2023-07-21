@@ -18,17 +18,16 @@
       <div class="col-lg-7 d-flex justify-content-center flex-column">
         <div class="card card-body d-flex justify-content-center shadow-lg p-5 blur align-items-center">
           <h3 class="text-center">{{ object|yesno:"Update,Create" }} cook</h3>
-            <form role="form" id="contact-form" method="post" autocomplete="off">
               <div class="card-body">
                 <div class="row">
                   <div class="mb-3">
-                    <form action="" >
+                    <form method="POST" enctype="multipart/form-data" novalidate>
                     {% csrf_token %}
-                    {% for field in form %}
-                      <label>Enter cook {{ field.name }}</label>
-                      <div class="input-group">
-                        {{ field }}
+                    {{ form.as_p }}
+                       <div class="col-md-12">
+                        <input type="submit" value="Submit" class="btn bg-gradient-dark w-100"/>
                       </div>
+                    </form>
                       <div class="row">
                         <div class="col-md-12">
                           <div class="form-check form-switch mb-4">
@@ -36,11 +35,7 @@
                           </div>
                         </div>
                       </div>
-                    {% endfor %}
-                      <div class="col-md-12">
-                        <button type="submit" class="btn bg-gradient-dark w-100">Submit</button>
-                      </div>
-                    </form>
+
                   </div>
                 </div>
               </div>

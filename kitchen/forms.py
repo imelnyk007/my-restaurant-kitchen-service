@@ -16,6 +16,14 @@ class DishForm(forms.ModelForm):
         fields = "__all__"
 
 
+class DishUpdateForm(forms.ModelForm):
+    picture = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+
+    class Meta:
+        model = Dish
+        fields = "__all__"
+
+
 class CookCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = Cook
@@ -28,9 +36,11 @@ class CookCreationForm(UserCreationForm):
 
 
 class CookUpdateForm(forms.ModelForm):
+    photo = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+
     class Meta:
         model = Cook
-        fields = ["first_name", "last_name", "year_of_experience", "photo"]
+        fields = ['first_name', 'last_name', "year_of_experience", "photo"]
 
 
 class CategoryNameSearchForm(forms.Form):

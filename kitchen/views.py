@@ -13,7 +13,7 @@ from kitchen.forms import (
     CookUpdateForm,
     CategoryNameSearchForm,
     DishNameSearchForm,
-    CookUsernameSearchForm,
+    CookUsernameSearchForm, DishUpdateForm,
 )
 from kitchen.models import Category, Dish, Cook
 
@@ -107,12 +107,6 @@ class DishCreateView(LoginRequiredMixin, generic.CreateView):
     success_url = reverse_lazy("kitchen:dish-list")
 
 
-class DishUpdateView(LoginRequiredMixin, generic.UpdateView):
-    model = Dish
-    form_class = DishForm
-    success_url = reverse_lazy("kitchen:dish-list")
-
-
 class DishDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Dish
     success_url = reverse_lazy("kitchen:dish-list")
@@ -157,18 +151,6 @@ class CookDetailView(LoginRequiredMixin, generic.DetailView):
         return context
 
 
-class CookCreateView(LoginRequiredMixin, generic.CreateView):
-    model = Cook
-    form_class = CookCreationForm
-    success_url = reverse_lazy("kitchen:cook-list")
-
-
-class CookUpdateView(LoginRequiredMixin, generic.UpdateView):
-    model = Cook
-    form_class = CookUpdateForm
-    success_url = reverse_lazy("kitchen:cook-list")
-
-
 class CookDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Cook
     success_url = reverse_lazy("kitchen:cook-list")
@@ -202,3 +184,33 @@ def register_request(request):
             return redirect('kitchen:index')
         else:
             return render(request, 'registration/register.html', {'form': form})
+
+
+def update_cook(request, pk):
+    cook = Cook.objects.get(id=pk)
+
+    if request.method == 'POST':
+        form = CookUpdateForm(request.POST, request.FILES, instance=cook)
+
+        if form.is_valid():
+            form.save()
+            return redirect("kitchen:cook-detail", pk=cook.id)
+    else:
+        form = CookUpdateForm(instance=cook)
+
+    return render(request, 'kitchen/cook_form.html', {'form': form})
+
+
+def update_dish(request, pk):
+    dish = Dish.objects.get(id=pk)
+
+    if request.method == 'POST':
+        form = DishUpdateForm(request.POST, request.FILES, instance=dish)
+
+        if form.is_valid():
+            form.save()
+            return redirect("kitchen:dish-detail", pk=dish.id)
+    else:
+        form = DishUpdateForm(instance=dish)
+
+    return render(request, 'kitchen/cook_form.html', {'form': form})
