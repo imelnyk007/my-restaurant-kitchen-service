@@ -99,6 +99,9 @@
                       <a href="{% url "kitchen:cook-update" pk=user.id%}" class="dropdown-item border-radius-md">
                       <span class="ps-3">Update profile</span>
                     </a>
+                      <a href="{% url "kitchen:change-password" pk=user.id%}" class="dropdown-item border-radius-md">
+                      <span class="ps-3">Change password</span>
+                    </a>
                       <a href="{% url "kitchen:cook-delete" pk=user.id%}" class="dropdown-item border-radius-md">
                       <span class="ps-3">Delete profile</span>
                     </a>

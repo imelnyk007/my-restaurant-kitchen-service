@@ -16,7 +16,7 @@ from kitchen.views import (
     DishCreateView,
     toggle_assign_to_dish,
     register_request,
-    update_cook,
+    update_cook, ChangePasswordView,
 )
 
 urlpatterns = [
@@ -35,6 +35,7 @@ urlpatterns = [
     path("cooks/<int:pk>/", CookDetailView.as_view(), name="cook-detail"),
     path("cooks/create/", register_request, name="cook-create"),
     path("cooks/<int:pk>/update/", update_cook, name="cook-update"),
+    path("cooks/<int:pk>/change-password/", ChangePasswordView.as_view(), name="change-password"),
     path("cooks/<int:pk>/delete/", CookDeleteView.as_view(), name="cook-delete"),
     path("dishes/<int:pk>/toggle-assign/", toggle_assign_to_dish, name="toggle-dish-assign",),
 ]
