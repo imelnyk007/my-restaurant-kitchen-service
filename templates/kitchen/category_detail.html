@@ -47,6 +47,11 @@
         <h3 class="text-gradient text-primary mb-0 mt-2">{{ category.name }}</h3>
         <br>
       </div>
+    <div class="description ps-3">
+              <button type="button" class="btn bg-gradient w-auto me-0" style="font-size: 8px"><a href="{% url "kitchen:category-update" pk=category.id %}">Update</a></button>
+              <button type="button" class="btn bg-gradient-info w-auto me-0" style="font-size: 8px"><a href="{% url "kitchen:category-delete" pk=category.id %}">Delete</a></button>
+              <p></p>
+            </div>
       <div class="col-lg-6 mt-lg-0 mt-5 ps-lg-0 ps-0">
       {% if category.dish_set %}
         <h3><strong>Dishes in this category:</strong></h3>
