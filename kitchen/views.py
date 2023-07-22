@@ -58,6 +58,10 @@ class CategoryListView(LoginRequiredMixin, generic.ListView):
         return queryset
 
 
+class CategoryDetailView(generic.DetailView):
+    model = Category
+
+
 class CategoryCreateView(LoginRequiredMixin, generic.CreateView):
     model = Category
     fields = "__all__"
