@@ -58,7 +58,8 @@
           </ul>
       </div>
       <div class="col-lg-6 mt-lg-0 mt-5 ps-lg-0 ps-0">
-      <h3>Dishes prepared by {{ cook.first_name }}:</h3>
+      {% if cook.dishes.all %}
+        <h3>Dishes prepared by {{ cook.first_name }}:</h3>
         {% for dish in cook.dishes.all %}
           <div class="p-3 info-horizontal">
             <div class="icon icon-shape rounded-circle bg-gradient-primary shadow text-center">
@@ -73,6 +74,10 @@
             </div>
           </div>
         {% endfor %}
+        {% else %}
+        <p><strong>Oops, this cook has no dishes!</strong></p>
+      {% endif %}
+
       </div>
     </div>
   </div>
