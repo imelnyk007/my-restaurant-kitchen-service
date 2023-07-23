@@ -37,12 +37,13 @@
       </div>
     </div>
   </header>
-<!-- -------- START Features w/ icons and text on left & gradient title and text on right -------- -->
 <section class="py-9">
   <div class="container">
     <div class="row">
       <div class="col-lg-4">
+      {% if dish.picture %}
         <img src="{{ dish.picture.url }}" alt="" style="width: 250px">
+      {% endif %}
         <h3 class="text-gradient text-primary mb-0 mt-2">{{ dish.name }}</h3>
         <br>
         <h6>Price: {{ dish.price }} Category: {{ dish.category.name }}</h6>
@@ -60,7 +61,6 @@
           {% endif %}
         </div>
       </div>
-
       <div class="col-lg-6 mt-lg-0 mt-5 ps-lg-0 ps-0">
         {% if dish.cooks.all %}
           <h3>This dish can be prepared by:</h3>
@@ -82,9 +82,7 @@
           <p><strong>Oops, nobody cooks this dish!</strong></p>
         {% endif %}
       </div>
-
     </div>
-
   </div>
 </section>
 {% endblock content %}

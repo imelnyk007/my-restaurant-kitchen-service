@@ -20,69 +20,68 @@
           <div class="card card-body d-flex justify-content-center shadow-lg p-3 blur align-items-center">
             <h3 class="text-center">Create dish</h3>
             <form role="form" id="contact-form" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% if form.non_field_errors %}
-        {% for error in form.non_field_errors %}
-            <span class="text-danger"> {{ error }} </span>
-        {% endfor %}
-    {% endif %}
-    <div class="card-body">
-        <div class="row">
-            <div class="mb-4">
-                <label for="{{ form.name.id_for_label }}">Name</label>
-                <div class="input-group mb-4">
-                    <input class="form-control" aria-label="Name..." type="text" name="{{ form.name.name }}">
-                </div>
-            </div>
-            <div class="mb-4">
-                <label for="{{ form.price.id_for_label }}">Price</label>
-                <div class="input-group mb-0">
-                    <input class="form-control" aria-label="Price..." type="number" min="0" step="0.10" name="{{ form.price.name }}">
-                </div>
-            </div>
-            <div class="mb-4">
-                <label for="{{ form.category.id_for_label }}">Choose category:</label>
-                <select name="{{ form.category.name }}" id="{{ form.category.id_for_label }}" class="custom-select">
-                    <option value="">Select a category</option>
-                    {% for category in form.category.field.queryset %}
-                        <option value="{{ category.id }}">{{ category.name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="mb-4">
-                <label for="{{ form.description.id_for_label }}">Description</label>
-                <div class="input-group mb-0">
-                    <textarea id="{{ form.description.id_for_label }}" name="{{ form.description.name }}" rows="3" cols="33" class="form-control"></textarea>
-                </div>
-            </div>
-            <div class="mb-4">
-                <label for="{{ form.cooks.id_for_label }}">Choose cooks:</label>
+              {% csrf_token %}
+              {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                  <span class="text-danger"> {{ error }} </span>
+                {% endfor %}
+              {% endif %}
+              <div class="card-body">
                 <div class="row">
-                    {% for cook in form.cooks.field.queryset %}
+                  <div class="mb-4">
+                    <label for="{{ form.name.id_for_label }}">Name</label>
+                    <div class="input-group mb-4">
+                      <input class="form-control" aria-label="Name..." type="text" name="{{ form.name.name }}">
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <label for="{{ form.price.id_for_label }}">Price</label>
+                    <div class="input-group mb-0">
+                      <input class="form-control" aria-label="Price..." type="number" min="0" step="0.10" name="{{ form.price.name }}">
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <label for="{{ form.category.id_for_label }}">Choose category:</label>
+                    <select name="{{ form.category.name }}" id="{{ form.category.id_for_label }}" class="custom-select">
+                      <option value="">Select a category</option>
+                      {% for category in form.category.field.queryset %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="mb-4">
+                    <label for="{{ form.description.id_for_label }}">Description</label>
+                    <div class="input-group mb-0">
+                      <textarea id="{{ form.description.id_for_label }}" name="{{ form.description.name }}" rows="3" cols="33" class="form-control"></textarea>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <label for="{{ form.cooks.id_for_label }}">Choose cooks:</label>
+                    <div class="row">
+                      {% for cook in form.cooks.field.queryset %}
                         <div class="col-md-6">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="{{ form.cooks.html_name }}" value="{{ cook.id }}" id="id_{{ form.cooks.name }}_{{ cook.id }}">
-                                <label class="form-check-label" for="id_{{ form.cooks.name }}_{{ cook.id }}">{{ cook.first_name }} {{ cook.last_name }}</label>
-                            </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="{{ form.cooks.html_name }}" value="{{ cook.id }}" id="id_{{ form.cooks.name }}_{{ cook.id }}">
+                            <label class="form-check-label" for="id_{{ form.cooks.name }}_{{ cook.id }}">{{ cook.first_name }} {{ cook.last_name }}</label>
+                          </div>
                         </div>
-                    {% endfor %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <label for="{{ form.picture.id_for_label }}">Picture</label>
+                    <div class="input-group mb-0">
+                      <input class="form-control" aria-label="Picture..." type="file" name="{{ form.picture.name }}">
+                    </div>
+                  </div>
                 </div>
-            </div>
-            <div class="mb-4">
-                <label for="{{ form.picture.id_for_label }}">Picture</label>
-                <div class="input-group mb-0">
-                    <input class="form-control" aria-label="Picture..." type="file" name="{{ form.picture.name }}">
+                <div class="row">
+                  <div class="col-md-12">
+                    <button type="submit" class="btn bg-gradient-dark w-100">Submit</button>
+                  </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <button type="submit" class="btn bg-gradient-dark w-100">Submit</button>
-            </div>
-        </div>
-    </div>
-</form>
-
+              </div>
+            </form>
           </div>
         </div>
       </div>
