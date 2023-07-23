@@ -194,7 +194,11 @@ def register_request(request):
             login(request, user)
             return redirect('kitchen:index')
         else:
-            return render(request, 'registration/register.html', {'form': form})
+            return render(
+                request,
+                'registration/register.html',
+                {'form': form}
+            )
 
 
 @login_required
@@ -213,7 +217,11 @@ def update_cook(request, pk):
     return render(request, 'kitchen/cook_form.html', {'form': form})
 
 
-class ChangePasswordView(LoginRequiredMixin, SuccessMessageMixin, PasswordChangeView):
+class ChangePasswordView(
+    LoginRequiredMixin,
+    SuccessMessageMixin,
+    PasswordChangeView
+):
     template_name = 'registration/change_password.html'
     success_message = "Successfully Changed Your Password"
     success_url = reverse_lazy('kitchen:index')

@@ -6,7 +6,10 @@ from kitchen.models import Dish, Cook
 
 
 class DishForm(forms.ModelForm):
-    picture = forms.ImageField(required=False, widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    picture = forms.ImageField(
+        required=False,
+        widget=forms.FileInput(attrs={'class': 'form-control-file'})
+    )
     cooks = forms.ModelMultipleChoiceField(
         queryset=get_user_model().objects.all(),
         widget=forms.CheckboxSelectMultiple,
@@ -18,7 +21,10 @@ class DishForm(forms.ModelForm):
 
 
 class DishUpdateForm(forms.ModelForm):
-    picture = forms.ImageField(required=False, widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    picture = forms.ImageField(
+        required=False,
+        widget=forms.FileInput(attrs={'class': 'form-control-file'})
+    )
 
     class Meta:
         model = Dish
@@ -44,8 +50,13 @@ class CookCreationForm(UserCreationForm):
 
 
 class CookUpdateForm(forms.ModelForm):
-    first_name = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Enter your name"}))
-    photo = forms.ImageField(required=False, widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    first_name = forms.CharField(
+        widget=forms.TextInput(attrs={"placeholder": "Enter your name"})
+    )
+    photo = forms.ImageField(
+        required=False,
+        widget=forms.FileInput(attrs={'class': 'form-control-file'})
+    )
 
     class Meta:
         model = Cook

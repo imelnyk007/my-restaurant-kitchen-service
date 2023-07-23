@@ -1,7 +1,11 @@
 from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
-from kitchen.models import Category, Dish, Cook
-from kitchen.forms import DishForm, DishUpdateForm, CookCreationForm, CookUpdateForm
+from kitchen.models import Category, Cook
+from kitchen.forms import (DishForm,
+                           DishUpdateForm,
+                           CookCreationForm,
+                           CookUpdateForm
+                           )
 
 
 class DishFormTests(TestCase):
@@ -49,7 +53,11 @@ class DishFormTests(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_dish_update_form_with_picture(self):
-        image = SimpleUploadedFile("test_image.jpg", b"file_content", content_type="image/jpeg")
+        image = SimpleUploadedFile(
+            "test_image.jpg",
+            b"file_content",
+            content_type="image/jpeg"
+        )
         form_data = {
             'name': 'Updated Dish',
             'description': 'This is an updated test dish.',
@@ -109,7 +117,11 @@ class CookFormTests(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_cook_update_form_with_photo(self):
-        image = SimpleUploadedFile("test_image.jpg", b"file_content", content_type="image/jpeg")
+        image = SimpleUploadedFile(
+            "test_image.jpg",
+            b"file_content",
+            content_type="image/jpeg"
+        )
         form_data = {
             'first_name': 'Updated',
             'last_name': 'Cook',
@@ -127,4 +139,3 @@ class CookFormTests(TestCase):
         }
         form = CookUpdateForm(data=form_data)
         self.assertFalse(form.is_valid())
-

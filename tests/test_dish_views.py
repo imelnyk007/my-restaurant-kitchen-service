@@ -7,7 +7,10 @@ from kitchen.forms import DishNameSearchForm
 
 class DishViewTests(TestCase):
     def setUp(self):
-        self.user = Cook.objects.create_user(username='test_user', password='HytgvffhjH6754!^')
+        self.user = Cook.objects.create_user(
+            username='test_user',
+            password='HytgvffhjH6754!^'
+        )
         self.client = Client()
         self.client.login(username='test_user', password='HytgvffhjH6754!^')
 
@@ -33,7 +36,11 @@ class DishViewTests(TestCase):
         self.assertEqual(Dish.objects.count(), 2)
 
     def test_dish_detail_view(self):
-        image = SimpleUploadedFile("test_image.jpg", b"file_content", content_type="image/jpeg")
+        image = SimpleUploadedFile(
+            "test_image.jpg",
+            b"file_content",
+            content_type="image/jpeg"
+        )
         self.dish1.picture = image
         self.dish1.save()
 
@@ -85,5 +92,8 @@ class DishViewTests(TestCase):
         self.assertTemplateUsed(response, 'kitchen/dish_list.html')
         self.assertTrue('dish_list' in response.context)
         self.assertTrue('search_form' in response.context)
-        self.assertIsInstance(response.context['search_form'], DishNameSearchForm)
+        self.assertIsInstance(
+            response.context['search_form'],
+            DishNameSearchForm
+        )
         self.assertEqual(response.context['search_form'].initial['name'], '1')

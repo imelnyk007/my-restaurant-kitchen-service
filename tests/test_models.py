@@ -12,7 +12,10 @@ class CategoryModelTest(TestCase):
 
 class CookModelTest(TestCase):
     def setUp(self):
-        self.cook = Cook.objects.create(username='test_cook', year_of_experience=5)
+        self.cook = Cook.objects.create(
+            username='test_cook',
+            year_of_experience=5
+        )
 
     def test_cook_get_absolute_url(self):
         url = self.cook.get_absolute_url()
@@ -23,7 +26,11 @@ class DishModelTest(TestCase):
     def setUp(self):
         category = Category.objects.create(name='Test Category')
         cook = Cook.objects.create(username='test_cook', year_of_experience=5)
-        self.dish = Dish.objects.create(name='Test Dish', price=10.99, category=category)
+        self.dish = Dish.objects.create(
+            name='Test Dish',
+            price=10.99,
+            category=category
+        )
         self.dish.cooks.add(cook)
 
     def test_dish_str_method(self):

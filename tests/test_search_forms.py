@@ -1,5 +1,8 @@
 from django.test import TestCase
-from kitchen.forms import CategoryNameSearchForm, DishNameSearchForm, CookUsernameSearchForm
+from kitchen.forms import (CategoryNameSearchForm,
+                           DishNameSearchForm,
+                           CookUsernameSearchForm
+                           )
 
 
 class SearchFormTests(TestCase):

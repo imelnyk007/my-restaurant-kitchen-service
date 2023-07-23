@@ -32,7 +32,11 @@ class Dish(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     cooks = models.ManyToManyField(Cook, related_name="dishes")
-    picture = models.ImageField(null=True, blank=True, upload_to="dish_pictures/")
+    picture = models.ImageField(
+        null=True,
+        blank=True,
+        upload_to="dish_pictures/"
+    )
 
     class Meta:
         verbose_name_plural = "dishes"
