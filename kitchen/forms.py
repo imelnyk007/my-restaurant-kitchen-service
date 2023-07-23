@@ -6,6 +6,7 @@ from kitchen.models import Dish, Cook
 
 
 class DishForm(forms.ModelForm):
+    picture = forms.ImageField(required=False, widget=forms.FileInput(attrs={'class': 'form-control-file'}))
     cooks = forms.ModelMultipleChoiceField(
         queryset=get_user_model().objects.all(),
         widget=forms.CheckboxSelectMultiple,
