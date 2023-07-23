@@ -50,12 +50,14 @@
         <br>
         <h6>Username: <span style="opacity: 4">{{ cook.username }}</span></h6>
         <h6>Year of experience: {{ cook.year_of_experience }}</h6>
-        <h6>Category cook work with:</h6>
+        {% if categories %}
+          <h6>Category cook work with:</h6>
           <ul>
             {% for categorie in categories %}
               <li>{{ categorie }}</li>
             {% endfor %}
           </ul>
+        {% endif %}
       </div>
       <div class="col-lg-6 mt-lg-0 mt-5 ps-lg-0 ps-0">
       {% if cook.dishes.all %}

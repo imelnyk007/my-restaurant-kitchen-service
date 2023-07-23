@@ -14,21 +14,16 @@
 {% block content %}
   <header class="bg-gradient-dark">
     <div class="page-header min-vh-50" style="background-image: url('{% static 'img/cook_team.jpeg' %}');">
-      <span class="mask bg-gradient-info opacity-5"></span>
+      <span class="mask bg-gradient-light opacity-4"></span>
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-8 text-center mx-auto my-auto">
             <h1 class="text-white">Work with an amazing design</h1>
             <p class="lead mb-4 text-white opacity-8">We’re constantly trying to express ourselves and actualize our dreams. If you have the opportunity to play this game</p>
-            <form action="" method="get" class="form-inline">
-              <div class="input-group">
-                <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                </div>
-                {{ search_form }}
-                <button type="submit" class="btn btn-outline-primary">search</button>
+            <form action="" method="GET" class="form">
+              <div class="input-group mb-0">
+                <label for="username"></label>
+                <input type="text" placeholder="Search by username" class="form-control" name="username" id="username" value="{{ search_form.username.value }}">
               </div>
             </form>
           </div>
@@ -50,28 +45,16 @@
       </div>
     </div>
   </header>
-  <section class="pt-sm-8 pb-10 position-relative bg-gradient-dark">
-    <div class="position-absolute w-100 z-index-1 top-0 mt-n3">
-      <svg width="100%" viewBox="0 -2 1920 157" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <title>wave-down</title>
-        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <g fill="#FFFFFF" fill-rule="nonzero">
-            <g id="wave-down">
-              <path d="M0,60.8320331 C299.333333,115.127115 618.333333,111.165365 959,47.8320321 C1299.66667,-15.5013009 1620.66667,-15.2062179 1920,47.8320331 L1920,156.389409 L0,156.389409 L0,60.8320331 Z" id="Path-Copy-2" transform="translate(960.000000, 78.416017) rotate(180.000000) translate(-960.000000, -78.416017) "></path>
-            </g>
-          </g>
-        </g>
-      </svg>
-    </div>
+  <section class="pt-sm-0 pb-5 position-relative bg-gradient">
     <div class="container">
       <div class="row">
-        <div class="col-md-8 text-start mb-0 mt-5">
+        <div class="col-md-8 text-start mb-0 mt-0">
           <h3 class="text-white z-index-1 position-relative"></h3>
         </div>
       </div>
       <div class="row">
         {% for cook in cook_list %}
-                      <div class="col-lg-6 col-12" style="padding-top: 20px">
+          <div class="col-lg-6 col-12" style="padding-top: 10px">
             <div class="card card-profile overflow-hidden">
               <div class="row">
                 <div class="col-lg-4 col-md-6 col-12 pe-lg-0">
@@ -83,9 +66,7 @@
                     <div class="p-3 pe-md-0" style="height: 200px">
                       <p>There are no photo</p>
                     </div>
-
                   {% endif %}
-
                 </div>
                 <div class="col-lg-8 col-md-6 col-12 ps-lg-0 my-auto" >
                   <div class="card-body">

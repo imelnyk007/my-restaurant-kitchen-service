@@ -45,34 +45,30 @@
       <div class="col-lg-4">
         <h6 class="text-gradient text-dark mb-0 mt-2"> Category name</h6>
         <h3 class="text-gradient text-primary mb-0 mt-2">{{ category.name }}</h3>
-        <br>
+        <br><br>
+        <a href="{% url "kitchen:category-update" pk=category.id %}" class="btn btn-sm btn-outline-info text-nowrap mb-0">Update category</a>
+        <p></p>
+        <a href="{% url "kitchen:category-delete" pk=category.id %}" class="btn btn-sm btn-outline-danger text-nowrap mb-0">Delete category</a>
       </div>
-    <div class="description ps-3">
-              <button type="button" class="btn bg-gradient w-auto me-0" style="font-size: 8px"><a href="{% url "kitchen:category-update" pk=category.id %}">Update</a></button>
-              <button type="button" class="btn bg-gradient-info w-auto me-0" style="font-size: 8px"><a href="{% url "kitchen:category-delete" pk=category.id %}">Delete</a></button>
-              <p></p>
-            </div>
       <div class="col-lg-6 mt-lg-0 mt-5 ps-lg-0 ps-0">
-      {% if category.dish_set %}
-        <h3><strong>Dishes in this category:</strong></h3>
-        {% for dish in category.dish_set.all %}
-          <div class="p-3 info-horizontal">
-            <div class="icon icon-shape rounded-circle bg-gradient-primary shadow text-center">
-              <i class="fas fa-ship opacity-10"></i>
+        {% if category.dish_set %}
+          <h3><strong>Dishes in this category:</strong></h3>
+          {% for dish in category.dish_set.all %}
+            <div class="p-1 info-horizontal">
+              <div class="icon icon-shape rounded-circle bg-gradient-primary shadow text-center">
+                <i class="fas fa-ship opacity-10"></i>
+              </div>
+              <div class="description ps-3">
+                <a href="{% url "kitchen:dish-detail" pk=dish.id %}">
+                  <h4 class="mb-0 link-dark">{{ dish.name }}</h4>
+                </a>
+                <p><strong>Category:</strong> {{ dish.category.name }} <strong> Price:</strong> {{ dish.price }}</p>
+              </div>
             </div>
-            <div class="description ps-3">
-              <a href="{% url "kitchen:dish-detail" pk=dish.id %}">
-                <h4 class="mb-0 link-dark">{{ dish.name }}</h4>
-              </a>
-              <p><strong>Category:</strong> {{ dish.category.name }} <strong> Price:</strong> {{ dish.price }}</p>
-
-            </div>
-          </div>
-        {% endfor %}
+          {% endfor %}
         {% else %}
-        <p><strong>Oops, this category has no dishes!</strong></p>
-      {% endif %}
-
+          <p><strong>Oops, this category has no dishes!</strong></p>
+        {% endif %}
       </div>
     </div>
   </div>

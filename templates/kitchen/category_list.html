@@ -43,10 +43,12 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-4">
-        <form action="" method="get" class="form">
-            {{ search_form }}
-          <input type="submit" value="Search" class="btn bg-gradient-faded-secondary" style="font-size: 8px">
-        </form>
+        <form action="" method="GET" class="form">
+        <div class="input-group mb-0">
+          <label for="name"></label>
+          <input type="text" placeholder="Search by name" class="form-control" name="name" id="name" value="{{ search_form.name.value }}">
+        </div>
+      </form>
         <h3 class="text-gradient text-primary mb-0 mt-2">Check out dish category</h3>
         <h6><br></h6>
         <p>Pain is what we go through as we become older. We get insulted by others, lose trust for those others. We get back stabbed by friends. It becomes harder for us to give others a hand.</p>

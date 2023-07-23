@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -111,11 +111,12 @@ class DishDetailView(LoginRequiredMixin, generic.DetailView):
 class DishCreateView(LoginRequiredMixin, generic.CreateView):
     model = Dish
     form_class = DishForm
+    template_name = "kitchen/dish_create_form.html"
     success_url = reverse_lazy("kitchen:dish-list")
 
 
 def update_dish(request, pk):
-    dish = Dish.objects.get(id=pk)
+    dish = get_object_or_404(Dish, id=pk)
 
     if request.method == 'POST':
         form = DishUpdateForm(request.POST, request.FILES, instance=dish)
@@ -126,7 +127,7 @@ def update_dish(request, pk):
     else:
         form = DishUpdateForm(instance=dish)
 
-    return render(request, 'kitchen/dish_form.html', {'form': form})
+    return render(request, 'kitchen/dish_update_form.html', {'form': form})
 
 
 class DishDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -175,7 +176,7 @@ class CookDetailView(LoginRequiredMixin, generic.DetailView):
 
 class CookDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Cook
-    success_url = reverse_lazy("kitchen:cook-list")
+    success_url = reverse_lazy("kitchen:index")
 
 
 @login_required
@@ -201,7 +202,6 @@ def register_request(request):
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
-            messages.success(request, 'You have singed up successfully.')
             login(request, user)
             return redirect('kitchen:index')
         else:
@@ -218,7 +218,7 @@ def update_cook(request, pk):
             form.save()
             return redirect("kitchen:cook-detail", pk=cook.id)
     else:
-        form = CookUpdateForm(instance=cook)
+        form = CookUpdateForm(instance=request.user)
 
     return render(request, 'kitchen/cook_form.html', {'form': form})
 

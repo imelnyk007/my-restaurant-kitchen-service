@@ -12,13 +12,36 @@
 <br><br>
 
 {% block content %}
-  <h1 style="text-align: center; padding-top: 100px">Dishes <a href="{% url "kitchen:dish-create" %}" class="btn bg-gradient-light" style="text-align: right">Light</a></h1>
-  <form action="" method="GET" class="form">
-    {{ search_form }}
-    <input type="submit" value="Search" class="btn bg-gradient-faded-secondary" style="font-size: 8px">
-  </form>
+  <div style="padding-top: 100px">
+  <div class="row" >
+    <div class="col-md-3">
+      <form action="" method="GET" class="form">
+        <div class="input-group mb-0">
+          <label for="name"></label>
+          <input type="text" placeholder="Search by dish name" class="form-control" name="name" id="name" value="{{ search_form.name.value }}">
+        </div>
+      </form>
+    </div>
+    <div class="col-md-3 ps-2">
+      <h1 style="text-align: right">Dishes</h1>
+    </div>
+    <div class="col-md-3 ps-3" style="text-align: right">
+            <a href="{% url "kitchen:dish-create" %}" class="btn bg-gradient-light">Add new dish</a
+    </div>
+
+  </div>
+    <div >
 
 
+    </div>
+
+
+  </div>
+
+
+
+
+</div>
   {% for dish in dish_list %}
       <section class="py-sm-0 py-5 position-relative">
         <div class="container">

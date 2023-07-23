@@ -42,47 +42,49 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-4">
+        <img src="{{ dish.picture.url }}" alt="" style="width: 250px">
         <h3 class="text-gradient text-primary mb-0 mt-2">{{ dish.name }}</h3>
         <br>
         <h6>Price: {{ dish.price }} Category: {{ dish.category.name }}</h6>
         <p>{{ dish.description }}</p>
-        <a href="{% url "kitchen:dish-update" pk=dish.id %}" class="text-primary icon-move-right">Update {{ dish.name }}
-          <i class="fas fa-arrow-right text-sm ms-1"></i>
+        <a href="{% url "kitchen:dish-update" pk=dish.id %}" class="btn btn-sm btn-outline-info">Update {{ dish.name }}
         </a>
         <br>
-        <a href="{% url "kitchen:dish-delete" pk=dish.id %}" class="text-primary icon-move-right">Delete {{ dish.name }}
-          <i class="fas fa-arrow-right text-sm ms-1"></i>
+        <a href="{% url "kitchen:dish-delete" pk=dish.id %}" class="btn btn-sm btn-outline-danger">Delete {{ dish.name }}
         </a>
+        <div class="d-block">
+          {% if dish in user.dishes.all %}
+            <a href="{% url "kitchen:toggle-dish-assign" pk=dish.id %}" class="btn btn-sm btn-outline-danger">Delete from my dish list</a>
+          {% else %}
+            <a href="{% url "kitchen:toggle-dish-assign" pk=dish.id %}" class="btn btn-sm btn-outline-info text-nowrap mb-0">Add to my dish list</a>
+          {% endif %}
+        </div>
       </div>
-      <div class="d-block">
-        {% if dish in user.dishes.all %}
-          <a href="{% url "kitchen:toggle-dish-assign" pk=dish.id %}" class="btn btn-sm btn-outline-danger">Delete from my dish list</a>
-        {% else %}
-          <a href="{% url "kitchen:toggle-dish-assign" pk=dish.id %}" class="btn btn-sm btn-outline-info text-nowrap mb-0">Add to my dish list</a>
-        {% endif %}
-      </div>
-    {% if dish.cooks.all %}
+
       <div class="col-lg-6 mt-lg-0 mt-5 ps-lg-0 ps-0">
+        {% if dish.cooks.all %}
+          <h3>This dish can be prepared by:</h3>
         {% for cook in dish.cooks.all %}
           {% if cook %}
             <div class="p-3 info-horizontal">
-            <div class="icon icon-shape rounded-circle bg-gradient-primary shadow text-center">
-              <i class="fas fa-ship opacity-10"></i>
-            </div>
+              <div class="icon icon-shape rounded-circle bg-gradient-primary shadow text-center">
+                <i class="fas fa-ship opacity-10"></i>
+              </div>
               <div class="description ps-3">
-              <h4 class="mb-0">{{ cook.first_name }} {{ cook.last_name }}</h4>
-              <p><strong>Username:</strong> {{ cook.username }} <strong> Year of experience:</strong> {{ cook.year_of_experience }}</p>
+                <h4 class="mb-0">{{ cook.first_name }} {{ cook.last_name }}</h4>
+                <p><strong>Username:</strong> {{ cook.username }} <strong> Year of experience:</strong> {{ cook.year_of_experience }}</p>
               </div>
             </div>
           {% else %} <p>There are no cooks!</p>
           {% endif %}
         {% endfor %}
+        {% else %}
+          <p><strong>Oops, nobody cooks this dish!</strong></p>
+        {% endif %}
       </div>
-      {% else %}
-      <p><strong>Oops, nobody cooks this dish!</strong></p>
-    {% endif %}
 
     </div>
+
   </div>
 </section>
 {% endblock content %}
