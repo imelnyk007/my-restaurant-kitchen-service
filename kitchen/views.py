@@ -58,7 +58,7 @@ class CategoryListView(LoginRequiredMixin, generic.ListView):
         return queryset
 
 
-class CategoryDetailView(generic.DetailView):
+class CategoryDetailView(LoginRequiredMixin, generic.DetailView):
     model = Category
 
 
@@ -115,6 +115,7 @@ class DishCreateView(LoginRequiredMixin, generic.CreateView):
     success_url = reverse_lazy("kitchen:dish-list")
 
 
+@login_required
 def update_dish(request, pk):
     dish = get_object_or_404(Dish, id=pk)
 
@@ -179,18 +180,6 @@ class CookDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("kitchen:index")
 
 
-@login_required
-def toggle_assign_to_dish(request, pk):
-    cook = Cook.objects.get(id=request.user.id)
-    if (
-        Dish.objects.get(id=pk) in cook.dishes.all()
-    ):
-        cook.dishes.remove(pk)
-    else:
-        cook.dishes.add(pk)
-    return HttpResponseRedirect(reverse_lazy("kitchen:dish-detail", args=[pk]))
-
-
 def register_request(request):
     if request.method == 'GET':
         form = CookCreationForm()
@@ -208,6 +197,7 @@ def register_request(request):
             return render(request, 'registration/register.html', {'form': form})
 
 
+@login_required
 def update_cook(request, pk):
     cook = Cook.objects.get(id=pk)
 
@@ -223,7 +213,19 @@ def update_cook(request, pk):
     return render(request, 'kitchen/cook_form.html', {'form': form})
 
 
-class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
+class ChangePasswordView(LoginRequiredMixin, SuccessMessageMixin, PasswordChangeView):
     template_name = 'registration/change_password.html'
     success_message = "Successfully Changed Your Password"
     success_url = reverse_lazy('kitchen:index')
+
+
+@login_required
+def toggle_assign_to_dish(request, pk):
+    cook = Cook.objects.get(id=request.user.id)
+    if (
+        Dish.objects.get(id=pk) in cook.dishes.all()
+    ):
+        cook.dishes.remove(pk)
+    else:
+        cook.dishes.add(pk)
+    return HttpResponseRedirect(reverse_lazy("kitchen:dish-detail", args=[pk]))

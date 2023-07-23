@@ -58,7 +58,7 @@ class DishFormTests(TestCase):
             'cooks': [self.user],
             'picture': image,
         }
-        form = DishUpdateForm(data=form_data,)
+        form = DishUpdateForm(data=form_data)
         print(form.errors)
         self.assertTrue(form.is_valid())
 
