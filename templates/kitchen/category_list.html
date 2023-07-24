@@ -58,6 +58,7 @@
       </div>
       <div class="col-lg-6 mt-lg-0 mt-5 ps-lg-0 ps-0">
       <div class="container" style="columns: 2">
+      {% if category_list %}
         {% for category in category_list %}
           <div class="p-3 info-horizontal">
             <div class="icon icon-shape rounded-circle bg-gradient-primary shadow text-center">
@@ -71,6 +72,10 @@
             </div>
           </div>
         {% endfor %}
+      {% else %}
+        <p class="text-dark text-center">There are no categories!</p>
+      {% endif %}
+
       </div>
 
       </div>
