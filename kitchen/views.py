@@ -236,3 +236,21 @@ def toggle_assign_to_dish(request, pk):
     else:
         cook.dishes.add(pk)
     return HttpResponseRedirect(reverse_lazy("kitchen:dish-detail", args=[pk]))
+
+
+@login_required
+def remove_cook_from_dish(request, dish_id, cook_id):
+    dish = get_object_or_404(Dish, id=dish_id)
+    cook = get_object_or_404(Cook, id=cook_id)
+
+    dish.cooks.remove(cook)
+    return HttpResponseRedirect(reverse_lazy("kitchen:dish-detail", args=[dish_id]))
+
+
+@login_required
+def remove_dish_from_cook(request, cook_id,  dish_id):
+    dish = get_object_or_404(Dish, id=dish_id)
+    cook = get_object_or_404(Cook, id=cook_id)
+
+    cook.dishes.remove(dish)
+    return HttpResponseRedirect(reverse_lazy("kitchen:cook-detail", args=[cook_id]))

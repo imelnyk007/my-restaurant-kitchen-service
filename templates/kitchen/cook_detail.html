@@ -64,13 +64,25 @@
         <h3>Dishes prepared by {{ cook.first_name }}:</h3>
         {% for dish in cook.dishes.all %}
           <div class="p-3 info-horizontal">
-            <div class="icon icon-shape rounded-circle bg-gradient-primary shadow text-center">
-              <i class="fas fa-ship opacity-10"></i>
+            <div class="icon icon-shape rounded-circle bg-gradient-dark shadow text-center">
+              <i class="fas fa-utensils opacity-10"></i>
             </div>
             <div class="description ps-3">
-              <a href="{% url "kitchen:dish-detail" pk=dish.id %}">
+              <div class="row">
+                <div class="col-md-6">
+                  <a href="{% url "kitchen:dish-detail" pk=dish.id %}">
                 <h4 class="mb-0 link-dark">{{ dish.name }}</h4>
               </a>
+                </div>
+                <div class="col-md-6">
+                  <a href="{% url "kitchen:remove_dish_from_cook" cook_id=cook.id dish_id=dish.id %}">
+                  <i class="fas fa-times opacity-6"></i>
+                </a>
+                </div>
+
+              </div>
+
+
               <p><strong>Category:</strong> {{ dish.category.name }} <strong> Price:</strong> {{ dish.price }}</p>
 
             </div>
