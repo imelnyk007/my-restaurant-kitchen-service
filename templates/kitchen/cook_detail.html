@@ -50,6 +50,7 @@
         <br>
         <h6>Username: <span style="opacity: 4">{{ cook.username }}</span></h6>
         <h6>Year of experience: {{ cook.year_of_experience }}</h6>
+        <h6>Position: {{ cook.position }}</h6>
         {% if categories %}
           <h6>Category cook work with:</h6>
           <ul>
@@ -71,20 +72,16 @@
               <div class="row">
                 <div class="col-md-6">
                   <a href="{% url "kitchen:dish-detail" pk=dish.id %}">
-                <h4 class="mb-0 link-dark">{{ dish.name }}</h4>
-              </a>
+                    <h4 class="mb-0 link-dark">{{ dish.name }}</h4>
+                  </a>
                 </div>
                 <div class="col-md-6">
                   <a href="{% url "kitchen:remove_dish_from_cook" cook_id=cook.id dish_id=dish.id %}">
-                  <i class="fas fa-times opacity-6"></i>
-                </a>
+                    <i class="fas fa-times opacity-6"></i>
+                  </a>
                 </div>
-
               </div>
-
-
               <p><strong>Category:</strong> {{ dish.category.name }} <strong> Price:</strong> {{ dish.price }}</p>
-
             </div>
           </div>
         {% endfor %}

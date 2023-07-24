@@ -15,6 +15,11 @@ class Category(models.Model):
 
 
 class Cook(AbstractUser):
+    POSITION_CHOICES = {
+        ("Chef", "Chef"),
+        ("Cook", "Cook")
+    }
+    position = models.CharField(max_length=4, choices=POSITION_CHOICES, default="Cook")
     year_of_experience = models.IntegerField(null=True)
     photo = models.ImageField(null=True, blank=True, upload_to="cook_photo/")
 

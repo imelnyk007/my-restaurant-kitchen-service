@@ -71,10 +71,10 @@
                 <div class="col-lg-8 col-md-6 col-12 ps-lg-0 my-auto" >
                   <div class="card-body">
                     <a href="{% url "kitchen:cook-detail" pk=cook.id %}">
-                      <h5 class="mb-0">{{ cook.first_name }} {{ cook.last_name }}</h5>
+                      <h5 class="mb-4">{{ cook.first_name }} {{ cook.last_name }}</h5>
                     </a>
-                    <h6 class="text opacity-5">Year of experience: {{ cook.year_of_experience }}</h6>
-                    <p><br></p>
+                    <h6 class="text opacity-7">Year of experience: {{ cook.year_of_experience }}</h6>
+                    <h6 class="text opacity-7">Position: {{ cook.position }}</h6>
                   </div>
                 </div>
               </div>
