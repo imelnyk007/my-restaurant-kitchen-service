@@ -16,7 +16,7 @@ class DishAdmin(admin.ModelAdmin):
 
 @admin.register(Cook)
 class CookAdmin(UserAdmin):
-    list_display = UserAdmin.list_display + ("year_of_experience",)
+    list_display = UserAdmin.list_display + ("year_of_experience", "position")
     fieldsets = UserAdmin.fieldsets + (
-        (("Additional info", {"fields": ("year_of_experience", "photo")}),)
+        (("Additional info", {"fields": ("year_of_experience", "photo", "position")}),)
     )
