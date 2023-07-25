@@ -14,7 +14,7 @@
 
 {% block content %}
   <header class="bg-gradient-dark">
-    <div class="page-header min-vh-25" style="background-image: url('{% static 'img/curved1.jpg' %}');">
+    <div class="page-header min-height-250" style="background-image: url('{% static 'img/curved1.jpg' %}');">
       <span class="mask bg-gradient-info opacity-5"></span>
       <div class="container">
         <div class="row justify-content-center">
@@ -40,10 +40,10 @@
     </div>
   </header>
 <!-- -------- START Features w/ icons and text on left & gradient title and text on right -------- -->
-<section class="py-9">
+<section class="py-4">
   <div class="container">
     <div class="row">
-      <div class="col-lg-4">
+      <div class="col-lg-3">
         {% if cook.photo %}
           <img class="img border-radius-lg max-width-200 w-100 position-relative z-index-2" src="{{ cook.photo.url }}" alt="cook_photo">
         {% endif %}
@@ -61,34 +61,36 @@
           </ul>
         {% endif %}
       </div>
-      <div class="col-lg-6 mt-lg-0 mt-5 ps-lg-0 ps-0">
-      {% if cook.dishes.all %}
-        <h3>Dishes prepared by {{ cook.first_name }}:</h3>
-        {% for dish in cook.dishes.all %}
-          <div class="p-3 info-horizontal">
-            <div class="icon icon-shape rounded-circle bg-gradient-dark shadow text-center">
-              <i class="fas fa-utensils opacity-10"></i>
-            </div>
-            <div class="description ps-3">
-              <div class="row">
-                <div class="col-md-6">
-                  <a href="{% url "kitchen:dish-detail" pk=dish.id %}">
-                    <h4 class="mb-0 link-dark">{{ dish.name }}</h4>
-                  </a>
+      <div class="col-lg-8">
+        <h3 class="text-center">Dishes prepared by {{ cook.first_name }}:</h3>
+        <div class="container" style="columns: 2">
+          {% if cook.dishes.all %}
+            {% for dish in cook.dishes.all %}
+              <div class="p-3 info-horizontal">
+                <div class="icon icon-shape rounded-circle bg-gradient-dark shadow text-center">
+                  <i class="fas fa-utensils opacity-10"></i>
                 </div>
-                <div class="col-md-6">
-                  <a href="{% url "kitchen:remove_dish_from_cook" cook_id=cook.id dish_id=dish.id %}">
-                    <i class="fas fa-times opacity-6"></i>
-                  </a>
+                <div class="description ps-3">
+                  <div class="row">
+                    <div class="col-md-9">
+                      <a href="{% url "kitchen:dish-detail" pk=dish.id %}">
+                        <h4 class="mb-0 link-dark">{{ dish.name }}</h4>
+                      </a>
+                    </div>
+                    <div class="col-md-1">
+                      <a href="{% url "kitchen:remove_dish_from_cook" cook_id=cook.id dish_id=dish.id %}">
+                        <i class="fas fa-times opacity-6"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <p><strong>Category:</strong> {{ dish.category.name }} <strong> Price:</strong> {{ dish.price }}</p>
                 </div>
               </div>
-              <p><strong>Category:</strong> {{ dish.category.name }} <strong> Price:</strong> {{ dish.price }}</p>
-            </div>
-          </div>
-        {% endfor %}
-        {% else %}
-        <p><strong>Oops, this cook has no dishes!</strong></p>
-      {% endif %}
+            {% endfor %}
+            {% else %}
+            <p><strong>Oops, this cook has no dishes!</strong></p>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
