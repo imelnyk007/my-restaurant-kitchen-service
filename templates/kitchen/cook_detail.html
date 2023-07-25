@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load cloudinary %}
 
 {% block body %} class="blog-author bg-gray-100" {% endblock body %}
 
@@ -44,7 +45,7 @@
     <div class="row">
       <div class="col-lg-4">
         {% if cook.photo %}
-          <img class="img border-radius-lg max-width-200 w-100 position-relative z-index-2" src="{{ cook.photo.url }}" alt="cook_photo">
+          <img class="img border-radius-lg max-width-200 w-100 position-relative z-index-2" src="{% cloudinary "media/cook_photo/man_4_2_r55vlq" %}" alt="cook_photo">
         {% endif %}
         <h3 class="text-gradient text-primary mb-0 mt-2">{{ cook.first_name }} {{ cook.last_name }}</h3>
         <br>
@@ -88,7 +89,6 @@
         {% else %}
         <p><strong>Oops, this cook has no dishes!</strong></p>
       {% endif %}
-
       </div>
     </div>
   </div>

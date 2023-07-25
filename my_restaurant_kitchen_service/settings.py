@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    "cloudinary_storage",
+    "cloudinary",
+
     "kitchen",
 ]
 
@@ -133,9 +136,17 @@ STATICFILES_DIRS = [BASE_DIR / 'static', ]
 
 MEDIA_URL = "media/"
 
-MEDIA_ROOT = BASE_DIR / 'uploads'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dqwqdjuog',
+    'API_KEY': '461769456555676',
+    'API_SECRET': 'sVWUULdf7G2ZZvn3n5ZFD5Kk7-g',
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
