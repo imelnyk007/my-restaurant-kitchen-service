@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %} class="blog-author bg-gray-100" {% endblock body %}
+
+{% block header %}
+
+{% include 'includes/navigation.html' %}
+
+{% endblock header %}
+
+
+{% block content %}
+    <header class="bg-gradient-dark">
+    <div class="page-header min-height-100" style="background-image: url('{% static 'img/curved1.jpg' %}');">
+      <span class="mask bg-gradient-info opacity-5"></span>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center mx-auto my-auto">
+          </div>
+        </div>
+      </div>
+      <div class="position-absolute w-100 z-index-1 bottom-0">
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 40" preserveAspectRatio="none" shape-rendering="auto">
+          <defs>
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+          </defs>
+          <g class="moving-waves">
+            <use xlink:href="#gentle-wave" x="48" y="-1" fill="rgba(255,255,255,0.40" />
+            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.35)" />
+            <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.25)" />
+            <use xlink:href="#gentle-wave" x="48" y="8" fill="rgba(255,255,255,0.20)" />
+            <use xlink:href="#gentle-wave" x="48" y="13" fill="rgba(255,255,255,0.15)" />
+          </g>
+        </svg>
+      </div>
+    </div>
+  </header>
+  <div>
+    <div class="row">
+      <div class="col-md-4">
+        <form action="" method="GET" class="form">
+          <div class="input-group">
+            <label for="name"></label>
+            <input type="text" placeholder="Search by dish name" class="form-control" name="name" id="name" value="{{ search_form.name.value }}">
+          </div>
+        </form>
+      </div>
+      <div class="col-md-4">
+        <h1 style="text-align: center">Dishes</h1>
+      </div>
+      <div class="col-md-4" style="text-align: right">
+        <a href="{% url "kitchen:dish-create" %}" class="btn bg-gradient-light">Add new dish</a>
+      </div>
+    </div>
+  </div>
+  {% if dish_list %}
+    {% for dish in dish_list %}
+      <section class="py-sm-0 py-5 position-relative">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 mx-auto">
+              <div class="row py-lg-3 py-3">
+                {% if dish.picture %}
+                  <div class="col-lg-3 col-md-5 position-relative my-auto">
+                    <img class="img border-radius-lg max-width-200 w-100 position-relative z-index-2" style="height: 270px;" src="{{ dish.picture.url }}" alt="dish picture">
+                  </div>
+                {% endif %}
+                <div class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <a href="{% url "kitchen:dish-detail" pk=dish.id %}">
+                      <h4 class="mb-0 link-primary">{{ dish.name }}</h4>
+                    </a>
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col-auto">
+                      <span class="h6">Category:</span>
+                      <span>{{ dish.category.name }}</span>
+                    </div>
+                    <div class="col-auto">
+                      <span class="h6">Price: </span>
+                      <span>{{ dish.price }} $</span>
+                    </div>
+                  </div>
+                  <p class="text-lg mb-0">{{ dish.description }}<br></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    {% endfor %}
+  {% else %}
+    <p style="text-align: center">There are no dishes!</p>
+  {% endif %}
+
+{% endblock content %}
